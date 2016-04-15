@@ -1,0 +1,11 @@
+{
+  "name": "superjoin-coffee-plugin",
+  "version": "0.0.0",
+  "description": "CoffeeScript plugin for superjoin",
+  "main": "coffee.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andi Heinkelein <andifeind@noname-media.com>",
+  "license": "ISC"
+}

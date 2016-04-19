@@ -7,5 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andi Heinkelein <andifeind@noname-media.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "coffee-script": "^1.10.0"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@calypso:~/superjoin-coffee-plugin"
+  },
+  "keywords": [
+    "superjoin-plugin"
+  ]
 }

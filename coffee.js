@@ -9,7 +9,7 @@ let collectSubModules = function(source) {
 };
 
 module.exports = function(superjoin, log) {
-  superjoin.registerTask('precompile', function* (pipe) {
+  superjoin.registerTask('precompile', function* () {
     let opts = {
       bare: true
     };
@@ -24,12 +24,11 @@ module.exports = function(superjoin, log) {
   });
 
   superjoin.registerTask('collect', function* (pipe) {
-    console.log('COLLECT', pipe);
     for (let script of pipe.scripts) {
       if (script.ext === 'coffee') {
-
         let subModules = superjoin.grepSubmodules(script, /require\s*\(?(\'|".+?\'|")?\)/g);
         console.log('Submodules', subModules);
+        process.exit(0);
       }
     }
 

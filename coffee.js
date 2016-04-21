@@ -14,24 +14,20 @@ module.exports = function(superjoin, log) {
       bare: true
     };
 
-    for (let script of pipe.scripts) {
+    for (let script of this.scripts) {
       if (!script.hasPrecompilation && script.ext === 'coffee') {
         script.source = CoffeeScript(script.source, opts);
       }
     }
-
-    return pipe;
   });
 
-  superjoin.registerTask('collect', function* (pipe) {
-    for (let script of pipe.scripts) {
+  superjoin.registerTask('collect', function* () {
+    for (let script of this.scripts) {
+      console.log(script);
       if (script.ext === 'coffee') {
-        let subModules = superjoin.grepSubmodules(script, /require\s*\(?(\'|".+?\'|")?\)/g);
-        console.log('Submodules', subModules);
-        process.exit(0);
+        let match = script.source.match(/require\s*\(?(\'|".+?\'|")?\)/g);
+        console.log('Submodules', match);
       }
     }
-
-    return pipe;
   });
 };

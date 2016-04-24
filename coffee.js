@@ -9,19 +9,27 @@ let collectSubModules = function(source) {
 };
 
 module.exports = function(superjoin, log) {
-  superjoin.registerTask('precompile', function* () {
+  // superjoin.registerTask('precompile', function* () {
+  //   let opts = {
+  //     bare: true
+  //   };
+  //
+  //   for (let script of this.scripts) {
+  //     if (!script.hasPrecompilation && script.ext === 'coffee') {
+  //       script.source = CoffeeScript(script.source, opts);
+  //     }
+  //   }
+  // });
+
+  superjoin.registerPrecompiler('coffee', function CoffeePrecompiler(file, source) {
     let opts = {
       bare: true
     };
 
-    for (let script of this.scripts) {
-      if (!script.hasPrecompilation && script.ext === 'coffee') {
-        script.source = CoffeeScript(script.source, opts);
-      }
-    }
+    return CoffeeScript(source, opts);
   });
 
-  superjoin.registerTask('collect', function* () {
+  superjoin.registerTask('collect', function * CoffeeCollectTask() {
     for (let script of this.scripts) {
       console.log(script);
       if (script.ext === 'coffee') {

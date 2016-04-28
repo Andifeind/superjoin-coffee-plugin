@@ -35,7 +35,6 @@ module.exports = function(superjoin, log) {
     for (let script of this.scripts) {
       if (script.ext === 'coffee') {
         let match = script.source.match(/require\s*\(?(\'|".+?\'|")?\)/g);
-        console.log('Submodules', match);
       }
     }
   });

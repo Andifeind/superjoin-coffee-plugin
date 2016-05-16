@@ -28,12 +28,30 @@ module.exports = function(superjoin, log) {
         script.name = script.name += '.js';
         script.ext = 'js';
       }
+
+      if (!script.hasPrecompilation && script.ext === 'cson') {
+        try {
+          script.source = CoffeeScript('module.exports =\n' + script.source, opts);
+        }
+        catch (err) {
+          throw new Error('CoffeeScript compilation error', err);
+        }
+
+        script.hasPrecompilation = true;
+        script.orig = {
+          name: script.name,
+          ext: 'cson'
+        };
+
+        script.name = script.name += '.js';
+        script.ext = 'js';
+      }
     }
   });
 
   superjoin.registerTask('collect', function * CoffeeCollectTask() {
     for (let script of this.scripts) {
-      if (script.ext === 'coffee') {
+      if (script.ext === 'coffee' || script.ext === 'cson') {
         let match = script.source.match(/require\s*\(?(\'|".+?\'|")?\)/g);
       }
     }

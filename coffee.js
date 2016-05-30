@@ -49,7 +49,7 @@ module.exports = function(superjoin, log) {
     }
   });
 
-  superjoin.registerTask('collect', function * CoffeeCollectTask() {
+  superjoin.registerTask('collect', function* CoffeeCollectTask() {
     for (let script of this.scripts) {
       if (script.ext === 'coffee' || script.ext === 'cson') {
         let match = script.source.match(/require\s*\(?(\'|".+?\'|")?\)/g);
